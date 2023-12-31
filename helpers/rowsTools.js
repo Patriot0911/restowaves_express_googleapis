@@ -51,12 +51,17 @@ export const getSeparatedRows = (rows) => {
     return res;
 };
 
+/*
+    Головна функція цього файлу.
+    Вона має поєднювати усі декомпозовані частини,
+    з метою перезібрати інформацію про нашу таблицю
+    та надати її нам у зручнішій формі,
+    яку пізніше ми вже можемо використати для запитів з DB
+*/
 export const parseModelRows = (rows) => {
     const separatedRows = getSeparatedRows(rows);
-    if(Object.values(separatedRows).includes(undefined)) {
+    if(Object.values(separatedRows).includes(undefined))
         throw 'Rows Error';
-        return;
-    }
     const productsArray = [];
     const {
         sizes,

@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 const app = express();
 const server = http.createServer(app);
 
-/* Midlleware */
+/* Middleware */
 app.use(express.json());
 
 /* Products Router */

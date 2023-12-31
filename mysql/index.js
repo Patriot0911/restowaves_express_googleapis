@@ -10,6 +10,7 @@ const dbInfo = {
     password: process.env.dbPassword
 };
 
+// Створємо pool для наших запитів
 const pool = mysql.createPool(dbInfo);
 
 export default pool;
