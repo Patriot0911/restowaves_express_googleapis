@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `products`.`productInfo` ;
 CREATE TABLE IF NOT EXISTS `products`.`productInfo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `productSpecId` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(132) NOT NULL,
   `price` INT NOT NULL,
   `productModelId` INT NOT NULL,
   PRIMARY KEY (`id`, `productSpecId`),
@@ -61,13 +61,14 @@ DROP TABLE IF EXISTS `products`.`productHasSize` ;
 CREATE TABLE IF NOT EXISTS `products`.`productHasSize` (
   `productId` INT NOT NULL,
   `size` INT NOT NULL,
-  PRIMARY KEY (`productId`),
   CONSTRAINT `productId`
     FOREIGN KEY (`productId`)
     REFERENCES `products`.`productInfo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `productsizes_uniq_idx` ON `products`.`productHasSize` (`productId` ASC, `size` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
