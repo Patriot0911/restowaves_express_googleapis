@@ -12,6 +12,8 @@ const tableProps = {
     sizes:          'Розміри'
 };
 
+const isTableProp = (str) => Object.values(tableProps).includes(str);
+
 const auth = new google.auth.GoogleAuth({
     keyFile: 'googleAccount.json',
     scopes: 'https://www.googleapis.com/auth/spreadsheets'
@@ -53,6 +55,7 @@ const getAllSheetsInfo = async () => {
 
 export {
     tableProps,
+    isTableProp,
     getAllSheets,
     getSheet,
     getAllSheetsInfo

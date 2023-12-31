@@ -48,25 +48,9 @@ CREATE TABLE IF NOT EXISTS `products`.`productInfo` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `name_UNIQUE` ON `products`.`productInfo` (`name` ASC) VISIBLE;
-
 CREATE INDEX `modelId_idx` ON `products`.`productInfo` (`productModelId` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `productSpecId_UNIQUE` ON `products`.`productInfo` (`productSpecId` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `products`.`productSizes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `products`.`productSizes` ;
-
-CREATE TABLE IF NOT EXISTS `products`.`productSizes` (
-  `int` INT NOT NULL,
-  `size` INT NOT NULL,
-  PRIMARY KEY (`int`))
-ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `size_UNIQUE` ON `products`.`productSizes` (`size` ASC) VISIBLE;
+CREATE UNIQUE INDEX `product_uniq_idx` ON `products`.`productInfo` (`productSpecId` ASC, `productModelId` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -76,21 +60,14 @@ DROP TABLE IF EXISTS `products`.`productHasSize` ;
 
 CREATE TABLE IF NOT EXISTS `products`.`productHasSize` (
   `productId` INT NOT NULL,
-  `sizeId` INT NOT NULL,
-  PRIMARY KEY (`productId`, `sizeId`),
+  `size` INT NOT NULL,
+  PRIMARY KEY (`productId`),
   CONSTRAINT `productId`
     FOREIGN KEY (`productId`)
     REFERENCES `products`.`productInfo` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `sizeId`
-    FOREIGN KEY (`sizeId`)
-    REFERENCES `products`.`productSizes` (`int`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE INDEX `sizeId_idx` ON `products`.`productHasSize` (`sizeId` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
